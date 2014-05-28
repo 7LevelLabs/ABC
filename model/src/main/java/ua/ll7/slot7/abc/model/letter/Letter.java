@@ -10,6 +10,7 @@ import org.hibernate.validator.constraints.NotBlank;
 import ua.ll7.slot7.abc.model.realobject.RealObject;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.List;
 
@@ -18,7 +19,7 @@ import java.util.List;
  *         22.05.14 : 14:53
  */
 @Entity
-@ApiModel( value = "Letter", description = "Letter resource representation" )
+@ApiModel(value = "Letter", description = "Letter resource representation")
 public class Letter implements Serializable {
 
 	@Id
@@ -28,15 +29,15 @@ public class Letter implements Serializable {
 		return id;
 	}
 
-	@Column(nullable = false,unique = true)
-	@ApiModelProperty( value = "Letter's Character", required = true )
+	@Column(nullable = false, unique = true)
+	@ApiModelProperty(value = "Letter's Character", required = true)
 	public Character getaChar() {
 		return aChar;
 	}
 
 	@Column(nullable = false)
 	@Type(type = "text")
-	@ApiModelProperty( value = "Letter's description", required = true )
+	@ApiModelProperty(value = "Letter's description", required = true)
 	public String getDescription() {
 		return description;
 	}
@@ -108,6 +109,7 @@ public class Letter implements Serializable {
 
 	private long id;
 
+	@NotNull(message = "Character must be not null")
 	private Character aChar;
 
 	@NotBlank(message = "Character description must be not blank")

@@ -38,10 +38,10 @@ public class RSActions {
 
 	@Test
 	public void actionCreateLetter() throws Exception {
-		Letter aLetter = letterHelper.getNewLetter('A', "Letter A");
+		Letter aLetter = letterHelper.getNewLetter('B', "Letter B");
 
-		RealObject realObjectA1 = realObjectHelper.getNewRealObject(aLetter,"ROA1","Real Object A1");
-		RealObject realObjectA2 = realObjectHelper.getNewRealObject(aLetter,"ROA2","Real Object A2");
+		RealObject realObjectA1 = realObjectHelper.getNewRealObject(aLetter, "ROB1", "Real Object B1");
+		RealObject realObjectA2 = realObjectHelper.getNewRealObject(aLetter, "ROB2", "Real Object B2");
 
 		letterHelper.addRealObject(aLetter, realObjectA1);
 		letterHelper.addRealObject(aLetter, realObjectA2);

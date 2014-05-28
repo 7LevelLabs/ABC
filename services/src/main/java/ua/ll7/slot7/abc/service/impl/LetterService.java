@@ -9,6 +9,8 @@ import ua.ll7.slot7.abc.dao.ILetterDAO;
 import ua.ll7.slot7.abc.model.letter.Letter;
 import ua.ll7.slot7.abc.service.ILetterService;
 
+import java.util.List;
+
 /**
  * @author Alex Velichko
  *         22.05.14 : 15:56
@@ -51,7 +53,17 @@ public class LetterService implements ILetterService {
 	}
 
 	@Override
+	public boolean existById(long anId) {
+		return findById(anId) != null;
+	}
+
+	@Override
 	public boolean existByChar(Character aChar) {
-		return findByCharacter(aChar)!=null;
+		return findByCharacter(aChar) != null;
+	}
+
+	@Override
+	public List<Letter> getAll() {
+		return letterDAO.getAll();
 	}
 }

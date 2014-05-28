@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 import ua.ll7.slot7.abc.dao.ILetterDAO;
 import ua.ll7.slot7.abc.model.letter.Letter;
 
+import java.util.List;
+
 /**
  * @author Alex Velichko
  *         22.05.14 : 15:36
@@ -88,5 +90,13 @@ public class LetterDAOImpl implements ILetterDAO {
 		query.setParameter("ch", aChar);
 
 		query.executeUpdate();
+	}
+
+	@Override
+	public List<Letter> getAll() {
+		List<Letter> result = null;
+		Session session = sessionFactory.getCurrentSession();
+		result = session.createCriteria(Letter.class).list();
+		return result;
 	}
 }

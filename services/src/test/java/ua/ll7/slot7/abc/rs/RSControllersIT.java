@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import ua.ll7.slot7.abc.helper.ILetterHelper;
-import ua.ll7.slot7.abc.model.letter.Letter;
 import ua.ll7.slot7.abc.service.ILetterService;
 
 import static com.jayway.restassured.RestAssured.given;
@@ -17,7 +16,7 @@ import static org.hamcrest.collection.IsIn.isOneOf;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:springConfigIT.xml")
-public class RSLettersControllerIT extends Assert {
+public class RSControllersIT extends Assert {
 
 	@Autowired
 	private ILetterHelper letterHelper;
@@ -29,24 +28,24 @@ public class RSLettersControllerIT extends Assert {
 	public void testGetLetterByChar() throws Exception {
 
 		//setup
-		Letter aLetter = letterHelper.getNewLetter('A', "Letter A");
-		letterService.createLetter(aLetter);
+//		Letter aLetter = letterHelper.getNewLetter('A', "Letter A");
+//		letterService.createLetter(aLetter);
 
 		//test
 		String stringToGet = "/services/letters/getByChar/A";
 
 		given()
-				.log().everything()
+			.log().everything()
 			.when()
-				.get(stringToGet)
+			.get(stringToGet)
 			.then()
-				.statusCode(isOneOf(200, 201))
-				.body("description", equalTo("Letter A"))
-				.body("aChar", equalTo("A"))
+			.statusCode(isOneOf(200, 201))
+			.body("description", equalTo("Letter A"))
+			.body("aChar", equalTo("A"))
 		;
 
 		//down
-		letterService.deleteLetterByChar('A');
+//		letterService.deleteLetterByChar('A');
 
 	}
 

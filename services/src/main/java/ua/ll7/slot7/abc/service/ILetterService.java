@@ -3,6 +3,8 @@ package ua.ll7.slot7.abc.service;
 import org.springframework.stereotype.Service;
 import ua.ll7.slot7.abc.model.letter.Letter;
 
+import java.util.List;
+
 /**
  * @author Alex Velichko
  *         22.05.14 : 15:45
@@ -23,5 +25,9 @@ public interface ILetterService {
 
 	public Letter findByCharacter(Character character);
 
+	public boolean existById(long anId);
+
 	public boolean existByChar(Character aChar);
+
+	public List<Letter> getAll();
 }
