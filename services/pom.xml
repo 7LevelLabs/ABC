@@ -76,24 +76,21 @@
 
     <dependencies>
 
+        <!--ABC model-->
+
+        <dependency>
+            <groupId>ua.ll7.slot7.abc</groupId>
+            <artifactId>model</artifactId>
+            <version>${model.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>${mysqlconnector.version}</version>
         </dependency>
 
-        <!--hibernate-->
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-core</artifactId>
-            <version>${hibernate.version}</version>
-        </dependency>
 
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-entitymanager</artifactId>
-            <version>${hibernate.version}</version>
-        </dependency>
 
         <!--springframework-->
         <dependency>
@@ -233,12 +230,7 @@
             <version>${jetty-maven-plugin.version}</version>
         </dependency>
 
-        <!--Swagger-->
-        <dependency>
-            <groupId>com.wordnik</groupId>
-            <artifactId>swagger-jersey-jaxrs_2.10</artifactId>
-            <version>${swagger-jersey-jaxrs_2.10.version}</version>
-        </dependency>
+
 
 
     </dependencies>

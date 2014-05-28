@@ -16,8 +16,7 @@
 
     <context:annotation-config/>
 
-    <context:component-scan base-package="ua.ll7.slot7.abc.model.letter"/>
-    <context:component-scan base-package="ua.ll7.slot7.abc.model.realobject"/>
+    <context:component-scan base-package="ua.ll7.slot7.abc.dao"/>
 
     <context:component-scan base-package="ua.ll7.slot7.abc.service"/>
 

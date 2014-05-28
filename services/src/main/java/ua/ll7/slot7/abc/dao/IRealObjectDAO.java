@@ -1,6 +1,7 @@
-package ua.ll7.slot7.abc.model.realobject;
+package ua.ll7.slot7.abc.dao;
 
 import org.springframework.stereotype.Repository;
+import ua.ll7.slot7.abc.model.realobject.RealObject;
 
 /**
  * @author Alex Velichko

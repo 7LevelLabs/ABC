@@ -1,12 +1,13 @@
-package ua.ll7.slot7.abc.service;
+package ua.ll7.slot7.abc.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import ua.ll7.slot7.abc.model.realobject.IRealObjectDAO;
+import ua.ll7.slot7.abc.dao.IRealObjectDAO;
 import ua.ll7.slot7.abc.model.realobject.RealObject;
+import ua.ll7.slot7.abc.service.IRealObjectService;
 
 /**
  * @author Alex Velichko

@@ -1,10 +1,12 @@
-package ua.ll7.slot7.abc.model.letter;
+package ua.ll7.slot7.abc.dao.impl;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import ua.ll7.slot7.abc.dao.ILetterDAO;
+import ua.ll7.slot7.abc.model.letter.Letter;
 
 /**
  * @author Alex Velichko

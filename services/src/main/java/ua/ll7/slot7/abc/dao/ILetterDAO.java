@@ -1,4 +1,6 @@
-package ua.ll7.slot7.abc.model.letter;
+package ua.ll7.slot7.abc.dao;
+
+import ua.ll7.slot7.abc.model.letter.Letter;
 
 /**
  * @author Alex Velichko

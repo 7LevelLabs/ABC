@@ -1,4 +1,4 @@
-package ua.ll7.slot7.abc.service;
+package ua.ll7.slot7.abc.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -6,6 +6,9 @@ import ua.ll7.slot7.abc.helper.ILetterHelper;
 import ua.ll7.slot7.abc.helper.IRealObjectHelper;
 import ua.ll7.slot7.abc.model.letter.Letter;
 import ua.ll7.slot7.abc.model.realobject.RealObject;
+import ua.ll7.slot7.abc.service.IBLService;
+import ua.ll7.slot7.abc.service.ILetterService;
+import ua.ll7.slot7.abc.service.IRealObjectService;
 
 /**
  * @author Alex Velichko

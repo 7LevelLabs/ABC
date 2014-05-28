@@ -10,9 +10,13 @@
     <version>0.1</version>
     <modules>
         <module>services</module>
+        <module>model</module>
     </modules>
 
     <properties>
+
+        <model.version>0.1</model.version>
+
         <spring.version>3.2.3.RELEASE</spring.version>
         <spring-security.version>3.1.4.RELEASE</spring-security.version>
 
@@ -175,6 +179,19 @@
             <version>${commons-lang3.version}</version>
         </dependency>
 
+        <!--hibernate-->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>${hibernate.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>${hibernate.version}</version>
+        </dependency>
+
         <!--hibernate-validator-->
         <dependency>
             <groupId>org.hibernate</groupId>
@@ -182,7 +199,12 @@
             <version>${hibernate-validator.version}</version>
         </dependency>
 
-
+        <!--Swagger-->
+        <dependency>
+            <groupId>com.wordnik</groupId>
+            <artifactId>swagger-jersey-jaxrs_2.10</artifactId>
+            <version>${swagger-jersey-jaxrs_2.10.version}</version>
+        </dependency>
 
     </dependencies>
 
