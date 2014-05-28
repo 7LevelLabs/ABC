@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import ua.ll7.slot7.abc.model.letter.Letter;
 import ua.ll7.slot7.abc.service.IBLService;
 import ua.ll7.slot7.abc.service.ILetterService;
-import ua.ll7.slot7.abc.service.IRealObjectService;
 
 import java.util.List;
 
@@ -30,16 +29,12 @@ public class RSLettersController {
 	private ILetterService letterService;
 
 	@Autowired
-	private IRealObjectService realObjectService;
-
-	@Autowired
 	private IBLService blService;
 
 	@RequestMapping(value = "/existByChar/{aChar}", method = RequestMethod.GET)
 	public ResponseEntity<Boolean> existLetterByChar(
 		@PathVariable("aChar")
-		String aChar
-	) {
+		String aChar) {
 
 		if (aChar == null) {
 			return new ResponseEntity<Boolean>(HttpStatus.NOT_ACCEPTABLE);
@@ -66,8 +61,7 @@ public class RSLettersController {
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public ResponseEntity<Letter> createLetter(
 		@RequestBody
-		Letter letter
-	) {
+		Letter letter) {
 		if (letterService.existByChar(letter.getaChar())) {
 			return new ResponseEntity<Letter>(HttpStatus.NOT_ACCEPTABLE);
 		}
@@ -144,8 +138,7 @@ public class RSLettersController {
 		@PathVariable("anId")
 		long anId,
 		@RequestBody
-		Letter letter
-	) {
+		Letter letter) {
 		if (anId < 1) {
 			return new ResponseEntity<Letter>(HttpStatus.NOT_ACCEPTABLE);
 		}

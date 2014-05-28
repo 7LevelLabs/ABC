@@ -1,13 +1,14 @@
 package ua.ll7.slot7.abc.rs;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import ua.ll7.slot7.abc.model.letter.Letter;
 import ua.ll7.slot7.abc.model.realobject.RealObject;
 import ua.ll7.slot7.abc.service.IBLService;
 import ua.ll7.slot7.abc.service.ILetterService;
@@ -20,39 +21,98 @@ import ua.ll7.slot7.abc.service.IRealObjectService;
 @Controller
 @RequestMapping("/realObjects")
 public class RSRealObjectsController {
-	@Autowired
-	private ILetterService letterService;
 
 	@Autowired
 	private IRealObjectService realObjectService;
 
 	@Autowired
+	private ILetterService letterService;
+
+	@Autowired
 	private IBLService blService;
+
+	@RequestMapping(value = "/existByName/{aName}", method = RequestMethod.GET)
+	public ResponseEntity<Boolean> existByName(
+		@PathVariable("aName")
+		String aName) {
+
+		Boolean result = realObjectService.existByName(aName);
+
+		if (result) {
+			return new ResponseEntity<Boolean>(result, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<Boolean>(result, HttpStatus.NOT_FOUND);
+		}
+	}
+
+	@RequestMapping(value = "/create", method = RequestMethod.POST)
+	public ResponseEntity<RealObject> createLetter(
+		@RequestBody
+		RealObject realObject) {
+
+		if (realObjectService.existByName(realObject.getName())) {
+			return new ResponseEntity<RealObject>(HttpStatus.NOT_ACCEPTABLE);
+		}
+
+		Letter letter = blService.getLetterByRealObjectName(realObject.getName());
+
+		blService.createAndPersistRealObject(letter.getaChar(),
+			realObject.getName(),
+			realObject.getDescription());
+
+		RealObject realObjectRead = realObjectService.findRealObjectById(realObject.getId());
+
+		if (realObjectRead == null) {
+			return new ResponseEntity<RealObject>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
+		return new ResponseEntity<RealObject>(realObjectRead, HttpStatus.NOT_FOUND);
+	}
 
 	@RequestMapping(value = "/getById/{anId}", method = RequestMethod.GET)
 	public ResponseEntity<RealObject> getRealObjectById(
 		@PathVariable("anId")
 		long anId) {
 
-		if (anId<1) {
+		if (anId < 1) {
 			return new ResponseEntity<RealObject>(HttpStatus.NOT_ACCEPTABLE);
 		}
 
 		RealObject result = realObjectService.findRealObjectById(anId);
 
-		if (result==null) {
+		if (result == null) {
 			return new ResponseEntity<RealObject>(HttpStatus.NOT_FOUND);
 		}
 
 		return new ResponseEntity<RealObject>(result, HttpStatus.OK);
 	}
 
+	@RequestMapping(value = "/update/{anId}", method = RequestMethod.PUT)
+	public ResponseEntity<RealObject> updateLetter(
+		@PathVariable("anId")
+		long anId,
+		@RequestBody
+		RealObject realObject) {
+		if (anId < 1) {
+			return new ResponseEntity<RealObject>(HttpStatus.NOT_ACCEPTABLE);
+		}
+
+		if (!realObjectService.existById(anId)) {
+			return new ResponseEntity<RealObject>(HttpStatus.NOT_FOUND);
+		}
+
+		realObjectService.updateRealObject(realObject);
+
+		RealObject realObjectRead = realObjectService.findRealObjectById(anId);
+
+		return new ResponseEntity<RealObject>(realObjectRead, HttpStatus.OK);
+	}
+
 	@RequestMapping(value = "/deleteById/{aName}", method = RequestMethod.DELETE)
 	public ResponseEntity deleteRealObjectById(
 		@PathVariable("aName")
-		long anId
-	) {
-		if (anId<1) {
+		long anId) {
+		if (anId < 1) {
 			return new ResponseEntity(HttpStatus.NOT_ACCEPTABLE);
 		}
 
@@ -63,24 +123,4 @@ public class RSRealObjectsController {
 		blService.deleteRealObjectById(anId);
 		return new ResponseEntity(HttpStatus.OK);
 	}
-
-	@RequestMapping(value = "/deleteByName/{aName}", method = RequestMethod.DELETE)
-	public ResponseEntity deleteRealObjectByName(
-		@PathVariable("aName")
-		String aName
-	) {
-		if (StringUtils.isBlank(aName)) {
-			return new ResponseEntity(HttpStatus.NOT_ACCEPTABLE);
-		}
-
-		if (!realObjectService.existByName(aName)) {
-			return new ResponseEntity(HttpStatus.NOT_FOUND);
-		}
-
-		blService.deleteRealObjectByName(aName);
-		return new ResponseEntity(HttpStatus.OK);
-	}
-
-
-
 }
