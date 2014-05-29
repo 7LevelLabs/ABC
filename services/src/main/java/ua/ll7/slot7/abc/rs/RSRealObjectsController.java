@@ -46,7 +46,7 @@ public class RSRealObjectsController {
 	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
-	public ResponseEntity<RealObject> createLetter(
+	public ResponseEntity<RealObject> create(
 		@RequestBody
 		RealObject realObject) {
 
@@ -70,7 +70,7 @@ public class RSRealObjectsController {
 	}
 
 	@RequestMapping(value = "/getById/{anId}", method = RequestMethod.GET)
-	public ResponseEntity<RealObject> getRealObjectById(
+	public ResponseEntity<RealObject> getById(
 		@PathVariable("anId")
 		long anId) {
 
@@ -88,7 +88,7 @@ public class RSRealObjectsController {
 	}
 
 	@RequestMapping(value = "/update/{anId}", method = RequestMethod.PUT)
-	public ResponseEntity<RealObject> updateLetter(
+	public ResponseEntity<RealObject> update(
 		@PathVariable("anId")
 		long anId,
 		@RequestBody
@@ -109,7 +109,7 @@ public class RSRealObjectsController {
 	}
 
 	@RequestMapping(value = "/deleteById/{aName}", method = RequestMethod.DELETE)
-	public ResponseEntity deleteRealObjectById(
+	public ResponseEntity deleteById(
 		@PathVariable("aName")
 		long anId) {
 		if (anId < 1) {

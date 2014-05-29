@@ -35,8 +35,10 @@ public class RSLettersController {
 	@Autowired
 	private IBLService blService;
 
+	//TODO existById
+
 	@RequestMapping(value = "/existByChar/{aChar}", method = RequestMethod.GET)
-	public ResponseEntity<Boolean> existLetterByChar(
+	public ResponseEntity<Boolean> existByChar(
 		@PathVariable("aChar")
 		String aChar) {
 
@@ -63,7 +65,7 @@ public class RSLettersController {
 	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
-	public ResponseEntity<Letter> createLetter(
+	public ResponseEntity<Letter> create(
 		@RequestBody
 		Letter letter) {
 		if (letterService.existByChar(letter.getaChar())) {
@@ -82,7 +84,7 @@ public class RSLettersController {
 	}
 
 	@RequestMapping(value = "/get", method = RequestMethod.GET)
-	public ResponseEntity<List<Letter>> getLetterAll() {
+	public ResponseEntity<List<Letter>> getAll() {
 		List<Letter> result = letterService.getAll();
 		return new ResponseEntity<List<Letter>>(result, HttpStatus.OK);
 	}
@@ -93,7 +95,7 @@ public class RSLettersController {
 		@ApiResponse(code = 404, message = "Letter with such Character doesn't exists"),
 		@ApiResponse(code = 406, message = "Non acceptable argument")
 	})
-	public ResponseEntity<Letter> getLetterByChar(
+	public ResponseEntity<Letter> getByChar(
 		@PathVariable("aChar")
 		@ApiParam(value = "Character to find", required = true)
 		String aChar) {
@@ -120,7 +122,7 @@ public class RSLettersController {
 	}
 
 	@RequestMapping(value = "/getById/{anId}", method = RequestMethod.GET)
-	public ResponseEntity<Letter> getLetterById(
+	public ResponseEntity<Letter> getById(
 		@PathVariable("anId")
 		long anId) {
 
@@ -138,7 +140,7 @@ public class RSLettersController {
 	}
 
 	@RequestMapping(value = "/update", method = RequestMethod.PUT)
-	public ResponseEntity<Letter> updateLetter(
+	public ResponseEntity<Letter> update(
 		@RequestBody
 		Letter letterContainer) {
 		long anId = letterContainer.getId();

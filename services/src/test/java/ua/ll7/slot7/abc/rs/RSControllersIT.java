@@ -29,7 +29,7 @@ public class RSControllersIT extends Assert {
 
 		//setup
 //		Letter aLetter = letterHelper.getNewLetter('A', "Letter A");
-//		letterService.createLetter(aLetter);
+//		letterService.create(aLetter);
 
 		//test
 		String stringToGet = "/services/letters/getByChar/A";
