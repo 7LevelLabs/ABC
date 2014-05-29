@@ -35,24 +35,24 @@ public class LetterServiceIT extends Assert {
 
 		Letter letterRead = letterService.findByCharacter(aChar);
 
-		assertEquals(letter,letterRead);
+		assertEquals(letter, letterRead);
 	}
 
 	@Test
 	public void testUpdateLetter() throws Exception {
-		char aChar = 'A';
-		String aLetterDescription = "Letter A";
+		char aChar = 'D';
+		String aLetterDescription = "Letter D";
 		Letter letter = letterHelper.getNewLetter(aChar, aLetterDescription);
 
 		letterService.createLetter(letter);
 
-		letter.setDescription("Letter A - new description");
+		letter.setDescription("Letter D - new description");
 
 		letterService.updateLetter(letter);
 
 		Letter letterRead = letterService.findByCharacter(aChar);
 
-		assertEquals(letterRead.getDescription(),"Letter A - new description");
+		assertEquals(letterRead.getDescription(), "Letter D - new description");
 	}
 
 	@Test
@@ -67,7 +67,7 @@ public class LetterServiceIT extends Assert {
 
 		Letter letterRead = letterService.findByCharacter(aChar);
 
-		assertTrue(letterRead==null);
+		assertTrue(letterRead == null);
 	}
 
 }

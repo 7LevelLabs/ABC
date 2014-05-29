@@ -16,7 +16,7 @@ public class LetterHelper implements ILetterHelper {
 
 	@Override
 	public Letter getNewLetter(char aChar, String aDescription) {
-		Letter letter = new Letter(aChar,aDescription);
+		Letter letter = new Letter(aChar, aDescription);
 
 		letter.setRealObjects(new LinkedList<RealObject>());
 
@@ -26,5 +26,15 @@ public class LetterHelper implements ILetterHelper {
 	@Override
 	public void addRealObject(Letter letter, RealObject realObject) {
 		letter.getRealObjects().add(realObject);
+	}
+
+	@Override
+	public void updateLetter(Letter container, Letter letter) {
+		if (container.getaChar() != null) {
+			letter.setaChar(container.getaChar());
+		}
+		if (container.getDescription() != null) {
+			letter.setDescription(container.getDescription());
+		}
 	}
 }

@@ -29,7 +29,7 @@ public class LetterDAOImpl implements ILetterDAO {
 	@Override
 	public void updateLetter(Letter letter) {
 		Session session = sessionFactory.getCurrentSession();
-		session.merge(letter);
+		session.update(letter);
 	}
 
 	@Override

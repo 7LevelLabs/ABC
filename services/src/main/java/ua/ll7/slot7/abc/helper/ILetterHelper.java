@@ -14,4 +14,5 @@ public interface ILetterHelper {
 
 	public void addRealObject(Letter letter, RealObject realObject);
 
+	public void updateLetter(Letter container, Letter letter);
 }

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import ua.ll7.slot7.abc.helper.ILetterHelper;
 import ua.ll7.slot7.abc.model.letter.Letter;
 import ua.ll7.slot7.abc.service.IBLService;
 import ua.ll7.slot7.abc.service.ILetterService;
@@ -27,6 +28,9 @@ public class RSLettersController {
 
 	@Autowired
 	private ILetterService letterService;
+
+	@Autowired
+	private ILetterHelper letterHelper;
 
 	@Autowired
 	private IBLService blService;
@@ -133,12 +137,12 @@ public class RSLettersController {
 		return new ResponseEntity<Letter>(result, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/update/{anId}", method = RequestMethod.PUT)
+	@RequestMapping(value = "/update", method = RequestMethod.PUT)
 	public ResponseEntity<Letter> updateLetter(
-		@PathVariable("anId")
-		long anId,
 		@RequestBody
-		Letter letter) {
+		Letter letterContainer) {
+		long anId = letterContainer.getId();
+
 		if (anId < 1) {
 			return new ResponseEntity<Letter>(HttpStatus.NOT_ACCEPTABLE);
 		}
@@ -147,9 +151,17 @@ public class RSLettersController {
 			return new ResponseEntity<Letter>(HttpStatus.NOT_FOUND);
 		}
 
-		letterService.updateLetter(letter);
+		if (!letterService.existByChar(letterContainer.getaChar())) {
+			return new ResponseEntity<Letter>(HttpStatus.NOT_ACCEPTABLE);
+		}
 
-		Letter letterRead = letterService.findById(anId);
+		Letter letterRead = letterService.findById(letterContainer.getId());
+
+		letterHelper.updateLetter(letterContainer, letterRead);
+
+		letterService.updateLetter(letterRead);
+
+		letterRead = letterService.findById(anId);
 
 		return new ResponseEntity<Letter>(letterRead, HttpStatus.OK);
 	}
