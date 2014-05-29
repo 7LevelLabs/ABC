@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import ua.ll7.slot7.abc.helper.IRealObjectHelper;
 import ua.ll7.slot7.abc.model.letter.Letter;
 import ua.ll7.slot7.abc.model.realobject.RealObject;
 import ua.ll7.slot7.abc.service.IBLService;
@@ -27,6 +28,9 @@ public class RSRealObjectsController {
 
 	@Autowired
 	private ILetterService letterService;
+
+	@Autowired
+	private IRealObjectHelper realObjectHelper;
 
 	@Autowired
 	private IBLService blService;
@@ -87,12 +91,13 @@ public class RSRealObjectsController {
 		return new ResponseEntity<RealObject>(result, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/update/{anId}", method = RequestMethod.PUT)
+	@RequestMapping(value = "/update", method = RequestMethod.PUT)
 	public ResponseEntity<RealObject> update(
-		@PathVariable("anId")
-		long anId,
 		@RequestBody
-		RealObject realObject) {
+		RealObject realObjectContainer) {
+
+		long anId = realObjectContainer.getId();
+
 		if (anId < 1) {
 			return new ResponseEntity<RealObject>(HttpStatus.NOT_ACCEPTABLE);
 		}
@@ -101,9 +106,17 @@ public class RSRealObjectsController {
 			return new ResponseEntity<RealObject>(HttpStatus.NOT_FOUND);
 		}
 
-		realObjectService.updateRealObject(realObject);
+		if (!realObjectService.existByName(realObjectContainer.getName())) {
+			return new ResponseEntity<RealObject>(HttpStatus.NOT_ACCEPTABLE);
+		}
 
 		RealObject realObjectRead = realObjectService.findRealObjectById(anId);
+
+		realObjectHelper.updateRealObject(realObjectContainer, realObjectRead);
+
+		realObjectService.updateRealObject(realObjectContainer);
+
+		realObjectRead = realObjectService.findRealObjectById(anId);
 
 		return new ResponseEntity<RealObject>(realObjectRead, HttpStatus.OK);
 	}

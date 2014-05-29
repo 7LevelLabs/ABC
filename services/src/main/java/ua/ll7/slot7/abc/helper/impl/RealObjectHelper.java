@@ -30,4 +30,14 @@ public class RealObjectHelper implements IRealObjectHelper {
 	public void deleteRealObject(Letter letter, RealObject realObject) {
 		letter.getRealObjects().remove(realObject);
 	}
+
+	@Override
+	public void updateRealObject(RealObject realObjectContainer, RealObject realObject) {
+		if (realObjectContainer.getName() != null) {
+			realObject.setName(realObjectContainer.getName());
+		}
+		if (realObjectContainer.getDescription() != null) {
+			realObject.setDescription(realObjectContainer.getDescription());
+		}
+	}
 }

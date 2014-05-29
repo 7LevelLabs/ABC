@@ -13,4 +13,6 @@ public interface IRealObjectHelper {
 	public RealObject getNewRealObject(Letter letter, String name, String description);
 
 	public void deleteRealObject(Letter letter, RealObject realObject);
+
+	void updateRealObject(RealObject realObjectContainer, RealObject realObject);
 }
