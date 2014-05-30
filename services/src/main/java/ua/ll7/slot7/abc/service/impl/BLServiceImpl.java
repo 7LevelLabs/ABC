@@ -51,6 +51,17 @@ public class BLServiceImpl implements IBLService {
 	}
 
 	@Override
+	public void deleteLetterById(long anId) {
+		Letter letter = letterService.findById(anId);
+		letterService.deleteLetter(letter);
+	}
+
+	@Override
+	public Letter getLetterByRealObjectId(long anId) {
+		return getLetterByRealObjectName(realObjectService.findRealObjectById(anId).getName());
+	}
+
+	@Override
 	public RealObject createAndPersistRealObject(Character letterChar, String name, String description) throws IllegalArgumentException {
 
 		if (!letterService.existByChar(letterChar)) {
@@ -62,6 +73,13 @@ public class BLServiceImpl implements IBLService {
 		}
 
 		Letter letter = letterService.findByCharacter(letterChar);
+
+		return createAndPersistRealObject(letter, name, description);
+	}
+
+	@Override
+	public RealObject createAndPersistRealObject(Letter letter, String name, String description) {
+
 		RealObject realObject = realObjectHelper.getNewRealObject(letter,name,description);
 		realObjectService.createRealObject(realObject);
 
@@ -80,7 +98,6 @@ public class BLServiceImpl implements IBLService {
 			Letter letter = getLetterByRealObjectName(realObjectName);
 			RealObject realObject = realObjectService.findRealObjectByName(realObjectName);
 
-			realObjectHelper.deleteRealObject(letter,realObject);
 			realObjectService.deleteRealObject(realObject);
 
 			letterService.updateLetter(letter);

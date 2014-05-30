@@ -19,12 +19,19 @@ public interface IBLService {
 
 	public Letter getLetterByRealObjectName(String realObjectName);
 
+	public void deleteLetterById(long anId);
+
+	public Letter getLetterByRealObjectId(long anId);
+
 	//RealObject
 
 	public RealObject createAndPersistRealObject(Character letterChar, String name, String Description);
 
+	public RealObject createAndPersistRealObject(Letter letter, String name, String description);
+
 	public void deleteRealObjectById(long anId);
 
 	public void deleteRealObjectByName(String realObjectName);
+
 
 }
