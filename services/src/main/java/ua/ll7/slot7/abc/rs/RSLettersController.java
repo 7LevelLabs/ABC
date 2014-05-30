@@ -80,7 +80,7 @@ public class RSLettersController {
 
 		}
 
-		return new ResponseEntity<Letter>(letterRead, HttpStatus.NOT_FOUND);
+		return new ResponseEntity<Letter>(letterRead, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/get", method = RequestMethod.GET)
@@ -166,6 +166,23 @@ public class RSLettersController {
 		letterRead = letterService.findById(anId);
 
 		return new ResponseEntity<Letter>(letterRead, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/deleteById/{anId}", method = RequestMethod.DELETE)
+	public ResponseEntity delete(
+		@PathVariable("anId")
+		long anId
+	) {
+
+		if (anId < 1) {
+			return new ResponseEntity(HttpStatus.NOT_FOUND);
+		}
+
+		Letter letterRead = letterService.findById(anId);
+
+		letterService.deleteLetter(letterRead);
+
+		return new ResponseEntity(HttpStatus.OK);
 	}
 
 }
