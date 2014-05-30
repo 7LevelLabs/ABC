@@ -35,12 +35,14 @@ public interface IABCRSClient {
 
 	public RealObject roGet(long anId);
 
-	public long roGetLetterId(long anId);
-
-	public Letter roGetLetter(long anId);
-
 	public void roUpdate(RealObject roContainer);
 
 	public void roDelete(long anId);
+
+	//BL
+
+	public long roGetLetterId(long anId);
+
+	public Letter roGetLetter(long anId);
 
 }
