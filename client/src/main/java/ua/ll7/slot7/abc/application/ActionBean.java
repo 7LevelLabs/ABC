@@ -2,7 +2,11 @@ package ua.ll7.slot7.abc.application;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
+import ua.ll7.slot7.abc.model.letter.Letter;
 import ua.ll7.slot7.abc.model.realobject.RealObject;
+
+import java.util.LinkedHashMap;
+import java.util.List;
 
 /**
  * @author Alex Velichko
@@ -14,7 +18,7 @@ public class ActionBean {
 	private RestTemplate restTemplate;
 
 	public void action() {
-		String url = "http://localhost:8080/services/realObjects/update";
+		String url = "http://localhost:8080/services/letters/get";
 
 		RealObject realObject = new RealObject();
 
@@ -23,9 +27,18 @@ public class ActionBean {
 //		realObject.setName("ROB3");
 		realObject.setDescription("Real Object C1");
 
-		restTemplate.put(url, realObject);
+		List<LinkedHashMap<String, Letter>> response = restTemplate.getForObject(url, List.class);
 
-		System.out.println("Done");
+		for (int i = 0; i < response.size(); i++) {
+			LinkedHashMap<String, Letter> stringLetterLinkedHashMap = response.get(i);
+
+			System.out.println(stringLetterLinkedHashMap);
+			System.out.println("===");
+
+
+		}
+
+//		System.out.println(responseEntity);
 
 //		System.out.println(result.getId());
 //		System.out.println(result.getName());

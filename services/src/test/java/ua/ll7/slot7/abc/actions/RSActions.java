@@ -48,9 +48,6 @@ public class RSActions {
 
 		letterService.createLetter(aLetter);
 
-//		realObjectService.createRealObject(realObjectA1);
-//		realObjectService.createRealObject(realObjectA2);
-
 	}
 
 	@Test
