@@ -17,19 +17,17 @@ public class ActionBean {
 	private RestTemplate restTemplate;
 
 	public void action() {
-//		String url = "http://localhost:8080/services/letters/getByChar/B";
-
-		String url = "http://localhost:8080/services/letters/update";
+		String url = "http://localhost:8080/services/letters/create";
 
 		Letter letter = new Letter();
-		letter.setId(3);
-		letter.setaChar('C');
-		letter.setDescription("Letter C");
+//		letter.setId(3);
+		letter.setaChar('D');
+		letter.setDescription("Letter D");
 		letter.setRealObjects(new LinkedList<RealObject>());
 
-		restTemplate.put(url, letter);
+		Letter letterRead = restTemplate.postForObject(url, letter, Letter.class);
 
-		System.out.println("Done");
+		System.out.println(letterRead);
 
 	}
 
