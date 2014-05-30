@@ -2,10 +2,7 @@ package ua.ll7.slot7.abc.application;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
-import ua.ll7.slot7.abc.model.letter.Letter;
 import ua.ll7.slot7.abc.model.realobject.RealObject;
-
-import java.util.LinkedList;
 
 /**
  * @author Alex Velichko
@@ -17,17 +14,22 @@ public class ActionBean {
 	private RestTemplate restTemplate;
 
 	public void action() {
-		String url = "http://localhost:8080/services/letters/create";
+		String url = "http://localhost:8080/services/realObjects/update";
 
-		Letter letter = new Letter();
-//		letter.setId(3);
-		letter.setaChar('D');
-		letter.setDescription("Letter D");
-		letter.setRealObjects(new LinkedList<RealObject>());
+		RealObject realObject = new RealObject();
 
-		Letter letterRead = restTemplate.postForObject(url, letter, Letter.class);
+		realObject.setId(5);
 
-		System.out.println(letterRead);
+//		realObject.setName("ROB3");
+		realObject.setDescription("Real Object C1");
+
+		restTemplate.put(url, realObject);
+
+		System.out.println("Done");
+
+//		System.out.println(result.getId());
+//		System.out.println(result.getName());
+//		System.out.println(result.getDescription());
 
 	}
 
