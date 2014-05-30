@@ -74,7 +74,7 @@ public class RSLettersController {
 		Letter letterRead = letterService.findByCharacter(letter.getaChar());
 
 		if (letterRead == null) {
-			return new ResponseEntity<Letter>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<Letter>(HttpStatus.INTERNAL_SERVER_ERROR);
 
 		}
 
@@ -173,12 +173,14 @@ public class RSLettersController {
 	) {
 
 		if (anId < 1) {
+			return new ResponseEntity(HttpStatus.NOT_ACCEPTABLE);
+		}
+
+		if (!letterService.existById(anId)) {
 			return new ResponseEntity(HttpStatus.NOT_FOUND);
 		}
 
-		Letter letterRead = letterService.findById(anId);
-
-		letterService.deleteLetter(letterRead);
+		blService.deleteLetterById(anId);
 
 		return new ResponseEntity(HttpStatus.OK);
 	}
