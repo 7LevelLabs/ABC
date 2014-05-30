@@ -35,8 +35,6 @@ public class RSLettersController {
 	@Autowired
 	private IBLService blService;
 
-	//TODO existById
-
 	@RequestMapping(value = "/existByChar/{aChar}", method = RequestMethod.GET)
 	public ResponseEntity<Boolean> existByChar(
 		@PathVariable("aChar")
